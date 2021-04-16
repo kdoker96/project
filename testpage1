@@ -1,0 +1,45 @@
+import java.util.concurrent.TimeUnit;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class test {
+    public WebDriver driver;
+
+    public test() {
+    }
+
+    @Before
+
+    public void DriverAcma() {
+        driver = new ChromeDriver();
+        driver.navigate().to("https://www.gittigidiyor.com/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void TestPage() {
+        WebElement signbtn = this.driver.findElement(By.className("btnSignIn"));
+        signbtn.click();
+        this.driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
+        WebElement mailbox = this.driver.findElement(By.id("email"));
+        mailbox.click();
+        mailbox.sendKeys(new CharSequence[]{"kubradoker@hotmail.com"});
+        WebElement password = this.driver.findElement(By.id("password"));
+        password.click();
+        password.sendKeys(new CharSequence[]{"kd1234"});
+        this.driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
+        this.driver.findElement(By.id("loginButton")).click();
+    }
+
+    @After
+    public void closeDriver() {
+        this.driver.manage().timeouts().implicitlyWait(30L, TimeUnit.SECONDS);
+        this.driver.close();
+    }
+}
